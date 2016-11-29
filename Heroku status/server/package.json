@@ -1,0 +1,23 @@
+{
+  "name": "heroku",
+  "version": "1.0.0",
+  "description": "heroku status",
+  "main": "server.js",
+  "dependencies": {
+    "request": "^2.79.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "heroku"
+  },
+  "keywords": [
+    "heroku"
+  ],
+  "author": "alon",
+  "license": "ISC"
+}

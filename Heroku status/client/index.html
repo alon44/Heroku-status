@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Heroku status</title>
+
+<!-- Angular scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<!-- Bootstrapt scripts -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+	<div class="container">
+		<p>Current status: {{getStatus(data.current)}}</p>
+		<span>Availability:</span>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Duration Time</th>
+					<th>Status</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in data.issues" ng-class="getClass(item.status)">
+					<td class="col-md-3">{{item.time}}</td>
+					<td class="col-md-1">{{getStatus(item.status)}}</td>
+					<td class="col-md-8">{{item.contents}}</td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+	</div>
+
+<script src="controller.js"></script>
+</body>
+</html>
