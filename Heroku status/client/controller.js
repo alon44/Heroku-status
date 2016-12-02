@@ -1,10 +1,4 @@
-var app = angular.module('myApp', []);
-app.controller('myCtrl', function($scope, $http) {
-	
-	$http.get("http://localhost:40/")
-    .then(function(response) {
-        $scope.data = response.data;
-    });
+app.controller('myCtrl', function($scope, myService) {
 	
 	$scope.getStatus = function(statusColor){
 		switch(statusColor){
@@ -31,4 +25,12 @@ app.controller('myCtrl', function($scope, $http) {
 				return 'None';
 		}
 	}
+	
+	$scope.getHerokuData = function(){
+		myService.async().then(function(d) {
+		$scope.data = d.data;
+		});
+	}
+	
+	$scope.getHerokuData();
 });
