@@ -9,10 +9,10 @@ service.getHerokuData = new Promise((resolve, reject) => {
 	var resObject = { current: '', issues: []};
 
 	// Get status data
-	var getStatus = rp(config.statusURL)
+	var getStatus = rp(config.statusOptions)
     .then(function (result) {
 		// Save current status
-        resObject.current = JSON.parse(result).status.Production;
+		resObject.current = result.status.Production;
     })
     .catch(function (err) {
         // request failed
@@ -20,10 +20,11 @@ service.getHerokuData = new Promise((resolve, reject) => {
     });
 	
 	// Get issues data
-	var getIssues = rp(config.issuesURL)
+	var getIssues = rp(config.issuesOptions)
     .then(function (result) {
         // Get updates data as json from last issue
-		var updatesData = JSON.parse(result)[0].updates;
+		var updatesData = result[0].updates;
+		
 		// Run over all the issues updates
 		for (i = updatesData.length - 1; i >= 0; i--) {
 			// Create duration time string

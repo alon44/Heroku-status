@@ -2,24 +2,23 @@ var express = require('express');
 var service = require('./service.js');
 var config = require('./config.js');
 
-var app = express();
+var server = express();
+
+server.use(function(req, res, next) {
+  // Set CORS headers
+  res.header(config.allowOriginString, config.all);
+  next();
+});
 
 // Create server
-app.get('/getHerokuData', function (req, res) {
-    // Set CORS headers
-	res.setHeader(config.allowOriginString, config.all);
-	
-	// Set content type header
-	res.setHeader(config.contentTypeString, config.contentType);
+server.get('/getHerokuData', function (req, res) {
 	
 	// Return heroku data from service
 	service.getHerokuData.then(
         function(data) {
-		res.write(JSON.stringify(data, null, 3));
-		res.end();
+			res.json(data);
+			res.end();
         })
 })
 
-var server = app.listen(40, function () {
-   console.log(config.listenMessage);
-})
+module.exports = server;
