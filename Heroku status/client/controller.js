@@ -28,7 +28,7 @@ app.controller('myCtrl', function($scope, myService) {
 	
 	$scope.getHerokuData = function(){
 		myService.async().then(function(d) {
-		$scope.data = d.data;
+			$scope.data = d.data;
 		});
 	}
 	
